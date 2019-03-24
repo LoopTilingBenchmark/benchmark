@@ -1,3 +1,0 @@
-sourcefile : /home/vinu/workspace/surf/surf-ytopt/27stencil.c
-outputdir : experiments/exp-02
-compileoptions : --reps 5

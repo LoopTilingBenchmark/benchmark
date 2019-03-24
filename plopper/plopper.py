@@ -1,31 +1,16 @@
 import os
 import time
 import subprocess
+import random
+import config as cfg
 
 class Plopper:
-    # Initilizing global variables
     def __init__(self):
+        # Initilizing global variables
         self.configfile = os.path.dirname(os.path.abspath(__file__))+'/config.txt'
-        self.counter = 0
-        self.sourcefile = ""
-        self.outputdir = ""
-        self.compileoptions = ""
-        self.parseConfig()
-
-    # Parsing options from config file
-    def parseConfig(self):
-        with open(self.configfile, "r") as fp:
-            for line in fp:
-                if "sourcefile" in line:
-                    tmp1 = line.split(":")
-                    self.sourcefile = tmp1[1].strip()
-                if "outputdir" in line:
-                    tmp2 = line.split(":")
-                    self.outputdir = tmp2[1].strip()
-                    self.outputdir = self.outputdir+"/tmp_files"
-                if "compileoptions":
-                    tmp3 = line.split(":")
-                    self.compileoptions = tmp3[1].strip()
+        self.sourcefile = cfg.sourcefile
+        self.outputdir = cfg.outputdir+"/tmp_files"
+        self.compileoptions = cfg.compileoptions
 
         if not os.path.exists(self.outputdir):
             os.makedirs(self.outputdir)
@@ -49,7 +34,7 @@ class Plopper:
                 for key, value in dictVal.items():
                     if key in line:
                         flag = 1
-                        if value != "*": #For empty string options
+                        if value != 'None': #For empty string options
                             modified = line.replace('#'+key, str(value))
                             f2.write(modified)
                 if flag == 0: #To avoid writing the Marker
@@ -65,7 +50,7 @@ class Plopper:
                 for key, value in dictVal.items():
                     if key in line:
                         flag = 1
-                        if value != "*": #For empty string options
+                        if value != 'None': #For empty string options
                             modified = line.replace('#'+key, str(value))
                             f2.write(modified)
                 if flag == 0: #To avoid writing the Marker
@@ -74,9 +59,9 @@ class Plopper:
     # Function to find the execution time of the interim file, and return the execution time as cost to the search module
     def findRuntime(self, x, params):
         interimfile = ""
-        self.counter += 1
+        counter = random.randint(1, 10001) # To reduce collision increasing the sampling intervals
 
-        interimfile = self.outputdir+"/"+str(self.counter)+".c"
+        interimfile = self.outputdir+"/"+str(counter)+".c"
 
         # Generate intermediate file
         dictVal = self.createDict(x, params)
@@ -85,7 +70,7 @@ class Plopper:
         #compile and find the execution time
         tmpbinary = interimfile[:-2]
         cmd1 = "clang -fopenmp -lm "+interimfile+" -o "+tmpbinary
-        cmd2 = "./"+tmpbinary+" "+self.compileoptions
+        cmd2 = tmpbinary+" "+self.compileoptions
 
         start = time.time()
 
