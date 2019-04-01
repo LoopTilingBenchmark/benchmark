@@ -82,8 +82,26 @@ class Plopper:
 
         return exetime #return execution time as cost
 
+    def validate(self, inputList):
+
+        index = 0
+        valid = True
+        for i, s in enumerate(inputList):
+            if "collapse" in s:
+                index = i
+                break
+
+        for i in range(index+1, len(inputList)):
+            if inputList[i] is not 'None':
+                valid = False
+                break
+        
+        return valid 
+
 if __name__ == '__main__':
     params = ["LOOP1", "LOOP2", "LOOP3"]
-    x = ["#pragma omp parallel for", "#pragma omp parallel for", "#pragma omp simd"]
+    x = ["#pragma omp parallel for", "#pragma omp parallel for collapse", "None"]
     obj = Plopper()
-    retVal = obj.findRuntime(x, params)
+    #retVal = obj.findRuntime(x, params)
+    retVal = obj.validate(x)
+    print(retVal)

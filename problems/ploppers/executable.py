@@ -44,11 +44,15 @@ p2_dict = {'a': "None", 'b': "#pragma omp parallel for", 'c': "#pragma omp simd"
 
 obj = Plopper()
 def plopper_func(x):
-    result = 0
+    result = float('inf')
     
     value = [p0_dict[x[0]], p1_dict[x[1]], p2_dict[x[2]]]
     params = ["LOOP1", "LOOP2", "LOOP3"]
-    result = obj.findRuntime(value, params)
+
+    retVal = obj.validate(value)
+    
+    if retVal:
+        result = obj.findRuntime(value, params)
 
     return result
 
