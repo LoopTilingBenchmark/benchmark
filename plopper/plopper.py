@@ -1,4 +1,5 @@
 import os
+import sys
 import time
 import subprocess
 import random
@@ -59,6 +60,8 @@ class Plopper:
     # Function to find the execution time of the interim file, and return the execution time as cost to the search module
     def findRuntime(self, x, params):
         interimfile = ""
+        #exetime = float('inf')
+        exetime = sys.maxsize
         counter = random.randint(1, 10001) # To reduce collision increasing the sampling intervals
 
         interimfile = self.outputdir+"/"+str(counter)+".c"
@@ -69,39 +72,37 @@ class Plopper:
 
         #compile and find the execution time
         tmpbinary = interimfile[:-2]
-        cmd1 = "clang -fopenmp -lm "+interimfile+" -o "+tmpbinary
+
+        #cmd1 = "clang -fopenmp -lm "+interimfile+" -o "+tmpbinary
+
+        #cmd1 = "clang -fopenmp -DPOLYBENCH_TIME -O2 -I/home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/utilities -I/home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/atax "+interimfile+" /home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/utilities/polybench.c -o "+tmpbinary
+
+        #cmd1 = "clang -fopenmp -DPOLYBENCH_TIME -O2 -I/home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/utilities -I/home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/3mm "+interimfile+" /home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/utilities/polybench.c -o "+tmpbinary
+
+        #cmd1 = "clang -fopenmp -DPOLYBENCH_TIME -O2 -I/home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/utilities -I/home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/convolution-2d "+interimfile+" /home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/utilities/polybench.c -o "+tmpbinary
+
+        #cmd1 = "clang -fopenmp -lm -DPOLYBENCH_TIME -O2 -I/home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/utilities -I/home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/datamining/covariance "+interimfile+" /home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/utilities/polybench.c -o "+tmpbinary
+
+        cmd1 = "clang -fopenmp -lm -DPOLYBENCH_TIME -O2 -I/home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/utilities -I/home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/datamining/correlation "+interimfile+" /home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/utilities/polybench.c -o "+tmpbinary
         cmd2 = tmpbinary+" "+self.compileoptions
 
-        start = time.time()
+        #Find the compilation status using subprocess
+        compilation_status = subprocess.run(cmd1, shell=True, stderr=subprocess.PIPE)
+        
+        #Find the execution time only when the compilation return code is zero, else return infinity
+        if compilation_status.returncode == 0 and len(compilation_status.stderr) == 0: #Second condition is to check for warnings
+            execution_status = subprocess.run(cmd2, shell=True, stdout=subprocess.PIPE)
+            exetime = float(execution_status.stdout.decode('utf-8'))
 
-        status = subprocess.call(cmd1, shell=True)
-        status = subprocess.call(cmd2, shell=True)
-
-        end = time.time()
-        exetime = end - start
+        #start = time.time()
+        #end = time.time()
+        #exetime = end - start
 
         return exetime #return execution time as cost
 
-    def validate(self, inputList):
-
-        index = 0
-        valid = True
-        for i, s in enumerate(inputList):
-            if "collapse" in s:
-                index = i
-                break
-
-        for i in range(index+1, len(inputList)):
-            if inputList[i] is not 'None':
-                valid = False
-                break
-        
-        return valid 
-
 if __name__ == '__main__':
-    params = ["LOOP1", "LOOP2", "LOOP3"]
-    x = ["#pragma omp parallel for", "#pragma omp parallel for collapse", "None"]
+    params = ["LOOP1", "LOOP2", "LOOP3", "LOOP4"]
+    x = ["#pragma omp for private (i)", "#pragma omp for private (i)", "#pragma omp for private (j)", "#pragma omp for private (j2, i)"]
     obj = Plopper()
-    #retVal = obj.findRuntime(x, params)
-    retVal = obj.validate(x)
+    retVal = obj.findRuntime(x, params)
     print(retVal)
