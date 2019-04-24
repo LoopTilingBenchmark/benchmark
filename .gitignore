@@ -1,6 +1,6 @@
 *.eggs*
 __pycache__
-experiments
+#experiments
 
 .vscode/
 
