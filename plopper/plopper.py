@@ -1,6 +1,5 @@
 import os
 import sys
-import time
 import subprocess
 import random
 import config as cfg
@@ -31,31 +30,18 @@ class Plopper:
                 
         with open(outputfile, "w") as f2:
             for line in buf:
-                flag = 0
+                modify_line = line
                 for key, value in dictVal.items():
-                    if key in line:
-                        flag = 1
+                    if key in modify_line:
                         if value != 'None': #For empty string options
-                            modified = line.replace('#'+key, str(value))
-                            f2.write(modified)
-                if flag == 0: #To avoid writing the Marker
+                            modify_line = modify_line.replace('#'+key, str(value))
+                
+                if modify_line != line:
+                    f2.write(modify_line)
+                else:
+                    #To avoid writing the Marker
                     f2.write(line)
 
-        # second iteration to replace the parameter values mentioned through markers in problem.py
-        with open(outputfile, "r") as f1:
-            buf = f1.readlines()
-                
-        with open(outputfile, "w") as f2:
-            for line in buf:
-                flag = 0
-                for key, value in dictVal.items():
-                    if key in line:
-                        flag = 1
-                        if value != 'None': #For empty string options
-                            modified = line.replace('#'+key, str(value))
-                            f2.write(modified)
-                if flag == 0: #To avoid writing the Marker
-                    f2.write(line)
 
     # Function to find the execution time of the interim file, and return the execution time as cost to the search module
     def findRuntime(self, x, params):
@@ -75,7 +61,7 @@ class Plopper:
 
         #cmd1 = "clang -fopenmp -lm "+interimfile+" -o "+tmpbinary
 
-        #cmd1 = "clang -fopenmp -DPOLYBENCH_TIME -O2 -I/home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/utilities -I/home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/atax "+interimfile+" /home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/utilities/polybench.c -o "+tmpbinary
+        cmd1 = "clang -fopenmp -DPOLYBENCH_TIME -O2 -I/home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/utilities -I/home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/atax "+interimfile+" /home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/utilities/polybench.c -o "+tmpbinary
 
         #cmd1 = "clang -fopenmp -DPOLYBENCH_TIME -O2 -I/home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/utilities -I/home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/3mm "+interimfile+" /home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/utilities/polybench.c -o "+tmpbinary
 
@@ -83,7 +69,7 @@ class Plopper:
 
         #cmd1 = "clang -fopenmp -lm -DPOLYBENCH_TIME -O2 -I/home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/utilities -I/home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/datamining/covariance "+interimfile+" /home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/utilities/polybench.c -o "+tmpbinary
 
-        cmd1 = "clang -fopenmp -lm -DPOLYBENCH_TIME -O2 -I/home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/utilities -I/home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/datamining/correlation "+interimfile+" /home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/utilities/polybench.c -o "+tmpbinary
+        #cmd1 = "clang -fopenmp -lm -DPOLYBENCH_TIME -O2 -I/home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/utilities -I/home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/datamining/correlation "+interimfile+" /home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/utilities/polybench.c -o "+tmpbinary
         cmd2 = tmpbinary+" "+self.compileoptions
 
         #Find the compilation status using subprocess
@@ -94,15 +80,12 @@ class Plopper:
             execution_status = subprocess.run(cmd2, shell=True, stdout=subprocess.PIPE)
             exetime = float(execution_status.stdout.decode('utf-8'))
 
-        #start = time.time()
-        #end = time.time()
-        #exetime = end - start
-
+        print('Execution Time: ', exetime)
         return exetime #return execution time as cost
 
 if __name__ == '__main__':
-    params = ["LOOP1", "LOOP2", "LOOP3", "LOOP4"]
-    x = ["#pragma omp for private (i)", "#pragma omp for private (i)", "#pragma omp for private (j)", "#pragma omp for private (j2, i)"]
+    params = ["P1", "P2", "P3"]
+    x = ["static", "8", "2"]
     obj = Plopper()
     retVal = obj.findRuntime(x, params)
     print(retVal)

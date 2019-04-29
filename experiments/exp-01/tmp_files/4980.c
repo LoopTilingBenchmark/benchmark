@@ -64,12 +64,12 @@ void kernel_atax(int nx, int ny,
 {
   int i, j;
   #pragma scop
-  #pragma omp parallel num_threads(#P3)
+  #pragma omp parallel
   {
-    #pragma omp for schedule(#P1, #P2)
+    #pragma omp parallel for schedule(static, 1) num_threads(4)
     for (i = 0; i < _PB_NY; i++)
       y[i] = 0;
-    #pragma omp for private (j) schedule(#P1, #P2)
+    #pragma omp parallel for private (j) schedule(static, 1) num_threads(4)
     for (i = 0; i < _PB_NX; i++)
       {
 	tmp[i] = 0;
