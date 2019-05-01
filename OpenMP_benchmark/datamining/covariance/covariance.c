@@ -67,9 +67,9 @@ void kernel_covariance(int m, int n,
   
   #pragma scop
   /* Determine mean of column vectors of input data matrix */
-  #pragma omp parallel
+  #pragma omp parallel private(i, j, j2) num_threads(#P3)
   {
-    #pragma omp for private (i)
+    #pragma omp for schedule(#P1, #P2)
     for (j = 0; j < _PB_M; j++)
       {
         mean[j] = 0.0;
@@ -79,13 +79,13 @@ void kernel_covariance(int m, int n,
       }
       
     /* Center the column vectors. */
-    #pragma omp for private (j)
+    #pragma omp for schedule(#P1, #P2)
     for (i = 0; i < _PB_N; i++)
       for (j = 0; j < _PB_M; j++)
 	data[i][j] -= mean[j];
       
     /* Calculate the m * m covariance matrix. */
-    #pragma omp for private (j2, i)
+    #pragma omp for schedule(#P1, #P2)
     for (j1 = 0; j1 < _PB_M; j1++)
       for (j2 = j1; j2 < _PB_M; j2++)
 	{

@@ -15,7 +15,7 @@ from plopper import Plopper
 
 from numpy import abs, cos, exp, mean, pi, prod, sin, sqrt, sum
 seed = 12345
-nparams = 4
+nparams = 3
 
 def create_parser():
     'command line parser'
@@ -36,23 +36,22 @@ param_dict = vars(cmdline_args)
 p0 = param_dict['p0']
 p1 = param_dict['p1']
 p2 = param_dict['p2']
-p3 = param_dict['p3']
 
-x=[p0,p1,p2,p3]
+x=[p0,p1,p2]
 
-p0_dict = {'a': "None", 'b': "#pragma omp parallel for", 'c': "#pragma omp parallel for"}
-p1_dict = {'a': "None", 'b': "#pragma omp parallel for", 'c': "#pragma omp parallel for"}
-p2_dict = {'a': "None", 'b': "#pragma omp parallel for", 'c': "#pragma omp parallel for"}
-p3_dict = {'a': "None", 'b': "#pragma omp parallel for", 'c': "#pragma omp parallel for"}
+p0_dict = {'a': "static", 'b': "dynamic"}
+p1_dict = {'a': "1", 'b': "8", 'c': "16"}
+p2_dict = {'a': "1", 'b': "2", 'c': "4"}
 
 obj = Plopper()
 def plopper_func(x):
-    value = [p0_dict[x[0]], p1_dict[x[1]], p2_dict[x[2]], p3_dict[x[3]]]
-    params = ["LOOP1", "LOOP2", "LOOP3", "LOOP4"]
+    value = [p0_dict[x[0]], p1_dict[x[1]], p2_dict[x[2]]]
+    print('VALUES:',p0_dict[x[0]], p1_dict[x[1]], p2_dict[x[2]])
+    params = ["P1", "P2", "P3"]
 
     result = obj.findRuntime(value, params)
 
     return result
 
 pval = plopper_func(x)
-print('OUTPUT:%1.3f'%pval)
+print('OUTPUT:%f'%pval)

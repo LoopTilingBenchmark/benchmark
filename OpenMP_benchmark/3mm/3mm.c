@@ -76,10 +76,10 @@ void kernel_3mm(int ni, int nj, int nk, int nl, int nm,
 {
   int i, j, k;
   #pragma scop
-  #pragma omp parallel private (j, k)
+  #pragma omp parallel private (j, k) num_threads(#P3)
   {
     /* E := A*B */
-#LOOP1
+    #pragma omp for schedule(#P1, #P2)
     for (i = 0; i < _PB_NI; i++)
       for (j = 0; j < _PB_NJ; j++)
 	{
@@ -88,7 +88,7 @@ void kernel_3mm(int ni, int nj, int nk, int nl, int nm,
 	    E[i][j] += A[i][k] * B[k][j];
         }
     /* F := C*D */
-#LOOP2
+    #pragma omp for schedule(#P1, #P2)
     for (i = 0; i < _PB_NJ; i++)
       for (j = 0; j < _PB_NL; j++)
 	{
@@ -97,7 +97,7 @@ void kernel_3mm(int ni, int nj, int nk, int nl, int nm,
 	    F[i][j] += C[i][k] * D[k][j];
         }
     /* G := E*F */
-#LOOP3
+    #pragma omp for schedule(#P1, #P2)
     for (i = 0; i < _PB_NI; i++)
       for (j = 0; j < _PB_NL; j++)
 	{
@@ -106,6 +106,7 @@ void kernel_3mm(int ni, int nj, int nk, int nl, int nm,
 	    G[i][j] += E[i][k] * F[k][j];
 	}
   }
+  #pragma endscop
 }
 
 int main(int argc, char** argv)

@@ -15,10 +15,9 @@ for i in range(0, nparam):
     cmd_frmt += f" --p{i} {'{}'}"
 problem = Problem(cmd_frmt)
 
-problem.spec_dim(p_id=0, p_space=['a', 'b', 'c'], default='a')
+problem.spec_dim(p_id=0, p_space=['a', 'b'], default='a')
 problem.spec_dim(p_id=1, p_space=['a', 'b', 'c'], default='a')
 problem.spec_dim(p_id=2, p_space=['a', 'b', 'c'], default='a')
-#problem.spec_dim(p_id=3, p_space=['a', 'b', 'c'], default='a')
 
 problem.checkcfg()
 

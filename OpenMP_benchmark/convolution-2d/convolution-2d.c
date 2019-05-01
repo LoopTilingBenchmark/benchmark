@@ -26,7 +26,7 @@ void init_array (int ni, int nj,
 		 DATA_TYPE POLYBENCH_2D(A,NI,NJ,ni,nj))
 {
 
-	//printf("Initializing Array\n");
+//	printf("Initializing Array\n");
       	int i, j;
 
   for (i = 0; i < ni; i++)
@@ -65,10 +65,9 @@ void kernel_conv2d(int ni,
 {
   int i, j;
   #pragma scop
-#LOOP1
+  #pragma omp parallel for private(j) collapse(2) schedule(#P1, #P2) num_threads(#P3)
   for (i = 1; i < _PB_NI - 1; ++i)
   {
-#LOOP2
     for (j = 1; j < _PB_NJ - 1; ++j)
     {
 	    B[i][j] =  0.2 * A[i-1][j-1] + 0.5 * A[i-1][j] + -0.8 * A[i-1][j+1]
@@ -77,7 +76,7 @@ void kernel_conv2d(int ni,
     }
   }
   #pragma endscop
-  //printf("Kernal computation complete !!\n"); 
+ // printf("Kernal computation complete !!\n"); 
 }
 
 

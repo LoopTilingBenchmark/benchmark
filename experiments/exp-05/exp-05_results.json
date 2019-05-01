@@ -1,0 +1,44 @@
+[
+    {
+        "cost": 452.52503,
+        "elapsed_time": 455.0443925857544,
+        "endTime": 1556670968,
+        "evalnum": 0,
+        "key": "000_00000.dat",
+        "startTime": 1556670513,
+        "status": 0,
+        "x": [
+            "a",
+            "a",
+            "a"
+        ]
+    },
+    {
+        "cost": 452.556534,
+        "elapsed_time": 910.1110897064209,
+        "endTime": 1556671423,
+        "evalnum": 1,
+        "key": "000_00001.dat",
+        "startTime": 1556670968,
+        "status": 0,
+        "x": [
+            "a",
+            "c",
+            "a"
+        ]
+    },
+    {
+        "cost": 464.47193,
+        "elapsed_time": 1377.0970830917358,
+        "endTime": 1556671890,
+        "evalnum": 2,
+        "key": "000_00002.dat",
+        "startTime": 1556671423,
+        "status": 0,
+        "x": [
+            "a",
+            "a",
+            "c"
+        ]
+    }
+]
