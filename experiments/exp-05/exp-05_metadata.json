@@ -5,7 +5,7 @@
     "exp_id": "exp-05",
     "kappa": 0.0,
     "max_evals": 1000,
-    "max_time": 1000.0,
+    "max_time": 10000.0,
     "patience_fac": 10.0,
     "prob_attr": "problem",
     "prob_path": "problems/correlation/problem.py"
