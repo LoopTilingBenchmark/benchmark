@@ -59,17 +59,18 @@ class Plopper:
         #compile and find the execution time
         tmpbinary = interimfile[:-2]
 
-        #cmd1 = "clang -fopenmp -lm "+interimfile+" -o "+tmpbinary
+        #cmd1 = "gcc -fopenmp -lm "+interimfile+" -o "+tmpbinary
 
-        #cmd1 = "clang -fopenmp -DPOLYBENCH_TIME -O2 -I/home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/utilities -I/home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/atax "+interimfile+" /home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/utilities/polybench.c -o "+tmpbinary
+        #cmd1 = "gcc -fopenmp -DPOLYBENCH_TIME -O2 -I/home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/utilities -I/home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/atax "+interimfile+" /home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/utilities/polybench.c -o "+tmpbinary
 
-        #cmd1 = "clang -fopenmp -DPOLYBENCH_TIME -O2 -I/home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/utilities -I/home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/3mm "+interimfile+" /home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/utilities/polybench.c -o "+tmpbinary
+        #cmd1 = "gcc -fopenmp -DPOLYBENCH_TIME -O2 -I/home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/utilities -I/home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/3mm "+interimfile+" /home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/utilities/polybench.c -o "+tmpbinary
 
-        #cmd1 = "clang -fopenmp -DPOLYBENCH_TIME -O2 -I/home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/utilities -I/home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/convolution-2d "+interimfile+" /home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/utilities/polybench.c -o "+tmpbinary
+        #cmd1 = "gcc -fopenmp -DPOLYBENCH_TIME -O2 -I/home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/utilities -I/home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/convolution-2d "+interimfile+" /home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/utilities/polybench.c -o "+tmpbinary
 
-        #cmd1 = "clang -fopenmp -lm -DPOLYBENCH_TIME -O2 -I/home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/utilities -I/home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/datamining/covariance "+interimfile+" /home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/utilities/polybench.c -o "+tmpbinary
+        #cmd1 = "gcc -fopenmp -lm -DPOLYBENCH_TIME -O2 -I/home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/utilities -I/home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/covariance "+interimfile+" /home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/utilities/polybench.c -o "+tmpbinary
 
-        cmd1 = "clang -fopenmp -lm -DPOLYBENCH_TIME -O2 -I/home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/utilities -I/home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/datamining/correlation "+interimfile+" /home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/utilities/polybench.c -o "+tmpbinary
+        cmd1 = "gcc -fopenmp -DPOLYBENCH_TIME -O2 -I/home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/utilities -I/home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/correlation "+interimfile+" /home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/utilities/polybench.c -o "+tmpbinary+" -lm"
+
         cmd2 = tmpbinary+" "+self.compileoptions
 
         #Find the compilation status using subprocess

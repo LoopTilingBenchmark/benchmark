@@ -1,0 +1,17 @@
+#!/bin/bash -x
+#COBALT -n 1
+#COBALT -q debug-flat-quad
+#COBALT -A Performance
+#COBALT -t 30
+
+outputfile=experiments/exp-06/results/000_00016.dat
+
+ut=$(date '+%s')
+echo START TIME:$ut > experiments/exp-06/results/000_00016.dat
+echo INPUT:"['b', 'b', 'b']" >> experiments/exp-06/results/000_00016.dat
+python /home/vinu/workspace/surf/surf-ytopt/problems/atax/executable.py --p0 b --p1 b --p2 b >> experiments/exp-06/results/000_00016.dat
+ut=$(date '+%s')
+echo END TIME:$ut>> experiments/exp-06/results/000_00016.dat
+echo
+
+

@@ -1,0 +1,17 @@
+#!/bin/bash -x
+#COBALT -n 1
+#COBALT -q debug-flat-quad
+#COBALT -A Performance
+#COBALT -t 30
+
+outputfile=experiments/exp-08/results/000_00022.dat
+
+ut=$(date '+%s')
+echo START TIME:$ut > experiments/exp-08/results/000_00022.dat
+echo INPUT:"['b', 'b', 'a']" >> experiments/exp-08/results/000_00022.dat
+python /home/vinu/workspace/surf/surf-ytopt/problems/convolution-2d/executable.py --p0 b --p1 b --p2 a >> experiments/exp-08/results/000_00022.dat
+ut=$(date '+%s')
+echo END TIME:$ut>> experiments/exp-08/results/000_00022.dat
+echo
+
+
