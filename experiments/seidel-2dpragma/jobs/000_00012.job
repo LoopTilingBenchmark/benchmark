@@ -1,0 +1,17 @@
+#!/bin/bash -x
+#COBALT -n 1
+#COBALT -q debug-flat-quad
+#COBALT -A Performance
+#COBALT -t 30
+
+outputfile=experiments/seidel-2dpragma/results/000_00012.dat
+
+ut=$(date '+%s')
+echo START TIME:$ut > experiments/seidel-2dpragma/results/000_00012.dat
+echo INPUT:"['b', 'b']" >> experiments/seidel-2dpragma/results/000_00012.dat
+python /uufs/chpc.utah.edu/common/home/u1142914/lib/ytopt_vinu/polybench/polybench-code/stencils/seidel-2d/executable.py --p0 b --p1 b >> experiments/seidel-2dpragma/results/000_00012.dat
+ut=$(date '+%s')
+echo END TIME:$ut>> experiments/seidel-2dpragma/results/000_00012.dat
+echo
+
+

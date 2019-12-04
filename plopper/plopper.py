@@ -2,15 +2,18 @@ import os
 import sys
 import subprocess
 import random
-import config as cfg
 
 class Plopper:
-    def __init__(self):
+    def __init__(self,sourcefile,outputdir):
+        outputdir = "/uufs/chpc.utah.edu/common/home/u1142914/lib/ytopt_vinu/experiments/" + outputdir
+        compileoptions = ""
+
+        
         # Initilizing global variables
         self.configfile = os.path.dirname(os.path.abspath(__file__))+'/config.txt'
-        self.sourcefile = cfg.sourcefile
-        self.outputdir = cfg.outputdir+"/tmp_files"
-        self.compileoptions = cfg.compileoptions
+        self.sourcefile = sourcefile
+        self.outputdir = outputdir+"/tmp_files"
+        self.compileoptions = compileoptions
 
         if not os.path.exists(self.outputdir):
             os.makedirs(self.outputdir)
@@ -51,6 +54,8 @@ class Plopper:
         counter = random.randint(1, 10001) # To reduce collision increasing the sampling intervals
 
         interimfile = self.outputdir+"/"+str(counter)+".c"
+        
+        #subprocess.run(["/uufs/chpc.utah.edu/common/home/u1142914/lib/chill-dev/build1/chill", "chill.py","-o","output"])
 
         # Generate intermediate file
         dictVal = self.createDict(x, params)
@@ -59,28 +64,26 @@ class Plopper:
         #compile and find the execution time
         tmpbinary = interimfile[:-2]
 
-        #cmd1 = "gcc -fopenmp -lm "+interimfile+" -o "+tmpbinary
+        #cmd1 = "gcc -fopenmp -DPOLYBENCH_TIME -O2 -I/uufs/chpc.utah.edu/common/home/u1142914/lib/ytopt_vinu/OpenMP_benchmark/utilities -I/uufs/chpc.utah.edu/common/home/u1142914/lib/ytopt_vinu/OpenMP_benchmark/correlation "+interimfile+" /uufs/chpc.utah.edu/common/home/u1142914/lib/ytopt_vinu/OpenMP_benchmark/utilities/polybench.c -o "+tmpbinary+" -lm"
+        kernel_idx = self.sourcefile.rfind('/')
+        kernel_dir = self.sourcefile[:kernel_idx]
 
-        #cmd1 = "gcc -fopenmp -DPOLYBENCH_TIME -O2 -I/home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/utilities -I/home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/atax "+interimfile+" /home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/utilities/polybench.c -o "+tmpbinary
-
-        #cmd1 = "gcc -fopenmp -DPOLYBENCH_TIME -O2 -I/home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/utilities -I/home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/3mm "+interimfile+" /home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/utilities/polybench.c -o "+tmpbinary
-
-        #cmd1 = "gcc -fopenmp -DPOLYBENCH_TIME -O2 -I/home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/utilities -I/home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/convolution-2d "+interimfile+" /home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/utilities/polybench.c -o "+tmpbinary
-
-        #cmd1 = "gcc -fopenmp -lm -DPOLYBENCH_TIME -O2 -I/home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/utilities -I/home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/covariance "+interimfile+" /home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/utilities/polybench.c -o "+tmpbinary
-
-        cmd1 = "gcc -fopenmp -DPOLYBENCH_TIME -O2 -I/home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/utilities -I/home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/correlation "+interimfile+" /home/vinu/workspace/surf/surf-ytopt/OpenMP_benchmark/utilities/polybench.c -o "+tmpbinary+" -lm"
-
-        cmd2 = tmpbinary+" "+self.compileoptions
+        
+        cmd1 = "clang " + kernel_dir  + "/rest.c "  +interimfile+" /uufs/chpc.utah.edu/common/home/u1142914/lib/ytopt_vinu/polybench/polybench-code/utilities/polybench.c -DPOLYBENCH_TIME -O3 -mllvm -polly -mllvm -polly-process-unprofitable -march=native -o "+tmpbinary
+        cmd2 = "/uufs/chpc.utah.edu/common/home/u1142914/lib/ytopt_vinu/polybench/polybench-code/utilities/time_benchmark.sh " +  tmpbinary
+        #cmd2 = tmpbinary+" "+self.compileoptions
 
         #Find the compilation status using subprocess
         compilation_status = subprocess.run(cmd1, shell=True, stderr=subprocess.PIPE)
         
         #Find the execution time only when the compilation return code is zero, else return infinity
-        if compilation_status.returncode == 0 and len(compilation_status.stderr) == 0: #Second condition is to check for warnings
+        if compilation_status.returncode == 0 :
+        #and len(compilation_status.stderr) == 0: #Second condition is to check for warnings
             execution_status = subprocess.run(cmd2, shell=True, stdout=subprocess.PIPE)
             exetime = float(execution_status.stdout.decode('utf-8'))
-
+        else:
+            print(compilation_status.stderr)
+            print("compile failed")
         return exetime #return execution time as cost
 
 if __name__ == '__main__':

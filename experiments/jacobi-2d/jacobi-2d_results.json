@@ -1,0 +1,93 @@
+[
+    {
+        "cost": 2.716583,
+        "elapsed_time": 11.660970449447632,
+        "endTime": 1569013642,
+        "evalnum": 0,
+        "key": "000_00000.dat",
+        "startTime": 1569013630,
+        "status": 0,
+        "x": [
+            "a",
+            "a"
+        ]
+    },
+    {
+        "cost": 2.884588,
+        "elapsed_time": 20.525756120681763,
+        "endTime": 1569013651,
+        "evalnum": 1,
+        "key": "000_00001.dat",
+        "startTime": 1569013642,
+        "status": 0,
+        "x": [
+            "b",
+            "d"
+        ]
+    },
+    {
+        "cost": 2.855607,
+        "elapsed_time": 29.816168785095215,
+        "endTime": 1569013660,
+        "evalnum": 2,
+        "key": "000_00002.dat",
+        "startTime": 1569013651,
+        "status": 0,
+        "x": [
+            "b",
+            "b"
+        ]
+    },
+    {
+        "cost": 2.654371,
+        "elapsed_time": 38.45406723022461,
+        "endTime": 1569013669,
+        "evalnum": 3,
+        "key": "000_00003.dat",
+        "startTime": 1569013660,
+        "status": 0,
+        "x": [
+            "b",
+            "d"
+        ]
+    },
+    {
+        "cost": 2.794555,
+        "elapsed_time": 47.226672410964966,
+        "endTime": 1569013678,
+        "evalnum": 4,
+        "key": "000_00004.dat",
+        "startTime": 1569013669,
+        "status": 0,
+        "x": [
+            "d",
+            "b"
+        ]
+    },
+    {
+        "cost": 2.819004,
+        "elapsed_time": 57.52846837043762,
+        "endTime": 1569013688,
+        "evalnum": 5,
+        "key": "000_00005.dat",
+        "startTime": 1569013678,
+        "status": 0,
+        "x": [
+            "b",
+            "d"
+        ]
+    },
+    {
+        "cost": 2.728089,
+        "elapsed_time": 66.58667278289795,
+        "endTime": 1569013697,
+        "evalnum": 6,
+        "key": "000_00006.dat",
+        "startTime": 1569013688,
+        "status": 0,
+        "x": [
+            "d",
+            "b"
+        ]
+    }
+]

@@ -21,5 +21,7 @@ problem.spec_dim(p_id=2, p_space=['a', 'b', 'c'], default='a')
 
 problem.checkcfg()
 
+#print(cmd_frmt)
+
 if __name__ == '__main__':
     print(problem)

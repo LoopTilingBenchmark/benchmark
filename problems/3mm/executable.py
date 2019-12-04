@@ -10,7 +10,7 @@ import os
 import argparse
 import numpy as np
 
-sys.path.insert(0, '/home/vinu/workspace/surf/surf-ytopt/plopper')
+sys.path.insert(0, '/uufs/chpc.utah.edu/common/home/u1142914/lib/ytopt_vinu/plopper')
 from plopper import Plopper
 
 from numpy import abs, cos, exp, mean, pi, prod, sin, sqrt, sum
@@ -53,5 +53,7 @@ def plopper_func(x):
 
     return result
 
+
 pval = plopper_func(x)
+print(param_dict)
 print('OUTPUT:%f'%pval)

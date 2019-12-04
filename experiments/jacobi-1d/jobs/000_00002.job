@@ -1,0 +1,17 @@
+#!/bin/bash -x
+#COBALT -n 1
+#COBALT -q debug-flat-quad
+#COBALT -A Performance
+#COBALT -t 30
+
+outputfile=experiments/jacobi-1d/results/000_00002.dat
+
+ut=$(date '+%s')
+echo START TIME:$ut > experiments/jacobi-1d/results/000_00002.dat
+echo INPUT:"['b']" >> experiments/jacobi-1d/results/000_00002.dat
+python /uufs/chpc.utah.edu/common/home/u1142914/lib/ytopt_vinu/polybench/polybench-code/stencils/jacobi-1d/executable_chill.py --p0 b >> experiments/jacobi-1d/results/000_00002.dat
+ut=$(date '+%s')
+echo END TIME:$ut>> experiments/jacobi-1d/results/000_00002.dat
+echo
+
+

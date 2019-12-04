@@ -1,0 +1,171 @@
+[
+    {
+        "cost": 8.517781,
+        "elapsed_time": 53.6129093170166,
+        "endTime": 1571596171,
+        "evalnum": 0,
+        "key": "000_00000.dat",
+        "startTime": 1571596118,
+        "status": 0,
+        "x": [
+            "a",
+            "a"
+        ]
+    },
+    {
+        "cost": 10.961069,
+        "elapsed_time": 114.1207103729248,
+        "endTime": 1571596232,
+        "evalnum": 1,
+        "key": "000_00001.dat",
+        "startTime": 1571596171,
+        "status": 0,
+        "x": [
+            "b",
+            "d"
+        ]
+    },
+    {
+        "cost": 12.681134,
+        "elapsed_time": 187.73360657691956,
+        "endTime": 1571596305,
+        "evalnum": 2,
+        "key": "000_00002.dat",
+        "startTime": 1571596232,
+        "status": 0,
+        "x": [
+            "b",
+            "b"
+        ]
+    },
+    {
+        "cost": 9.199289,
+        "elapsed_time": 241.01269149780273,
+        "endTime": 1571596359,
+        "evalnum": 3,
+        "key": "000_00003.dat",
+        "startTime": 1571596306,
+        "status": 0,
+        "x": [
+            "a",
+            "d"
+        ]
+    },
+    {
+        "cost": 19.652797,
+        "elapsed_time": 342.9876618385315,
+        "endTime": 1571596461,
+        "evalnum": 4,
+        "key": "000_00004.dat",
+        "startTime": 1571596359,
+        "status": 0,
+        "x": [
+            "c",
+            "b"
+        ]
+    },
+    {
+        "cost": 9.560807,
+        "elapsed_time": 404.63426637649536,
+        "endTime": 1571596522,
+        "evalnum": 5,
+        "key": "000_00005.dat",
+        "startTime": 1571596461,
+        "status": 0,
+        "x": [
+            "a",
+            "d"
+        ]
+    },
+    {
+        "cost": 21.667976,
+        "elapsed_time": 515.1621565818787,
+        "endTime": 1571596633,
+        "evalnum": 6,
+        "key": "000_00006.dat",
+        "startTime": 1571596522,
+        "status": 0,
+        "x": [
+            "c",
+            "b"
+        ]
+    },
+    {
+        "cost": 13.120882,
+        "elapsed_time": 597.1998691558838,
+        "endTime": 1571596715,
+        "evalnum": 7,
+        "key": "000_00007.dat",
+        "startTime": 1571596633,
+        "status": 0,
+        "x": [
+            "b",
+            "b"
+        ]
+    },
+    {
+        "cost": 15.879563,
+        "elapsed_time": 682.2736299037933,
+        "endTime": 1571596800,
+        "evalnum": 8,
+        "key": "000_00008.dat",
+        "startTime": 1571596715,
+        "status": 0,
+        "x": [
+            "b",
+            "d"
+        ]
+    },
+    {
+        "cost": 9.570068,
+        "elapsed_time": 738.8454518318176,
+        "endTime": 1571596857,
+        "evalnum": 9,
+        "key": "000_00009.dat",
+        "startTime": 1571596800,
+        "status": 0,
+        "x": [
+            "a",
+            "a"
+        ]
+    },
+    {
+        "cost": 10.220309,
+        "elapsed_time": 796.0591177940369,
+        "endTime": 1571596914,
+        "evalnum": 10,
+        "key": "000_00010.dat",
+        "startTime": 1571596858,
+        "status": 0,
+        "x": [
+            "a",
+            "d"
+        ]
+    },
+    {
+        "cost": 8.986254,
+        "elapsed_time": 849.4404919147491,
+        "endTime": 1571596967,
+        "evalnum": 11,
+        "key": "000_00011.dat",
+        "startTime": 1571596915,
+        "status": 0,
+        "x": [
+            "a",
+            "d"
+        ]
+    },
+    {
+        "cost": 10.220045,
+        "elapsed_time": 906.4379150867462,
+        "endTime": 1571597024,
+        "evalnum": 12,
+        "key": "000_00012.dat",
+        "startTime": 1571596968,
+        "status": 0,
+        "x": [
+            "a",
+            "d"
+        ]
+    }
+]

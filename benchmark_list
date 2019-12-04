@@ -1,0 +1,5 @@
+/stencils/fdtd-2d/fdtd-2d.c
+#/stencils/heat-3d/heat-3d.c
+#/stencils/jacobi-1d/jacobi-1d.c
+#/stencils/jacobi-2d/jacobi-2d.c
+#/stencils/seidel-2d/seidel-2d.c

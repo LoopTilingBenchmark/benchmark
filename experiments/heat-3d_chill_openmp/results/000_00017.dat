@@ -1,0 +1,6 @@
+START TIME:1571551996
+INPUT:['c', 'c']
+b"heat-3d.c:74:3: warning: implicit declaration of function 'kernel_heat_3d' is invalid in C99 [-Wimplicit-function-declaration]\n  kernel_heat_3d (tsteps, n, *A, *B);\n  ^\n1 warning generated.\n/uufs/chpc.utah.edu/common/home/u1142914/lib/ytopt_vinu/experiments/heat-3d_chill_openmp/tmp_files/148.c:11:55: error: use of undeclared identifier 't14'\n    #pragma omp parallel for private(t4,t6,t8,t10,t12,t14)\n                                                      ^\n/uufs/chpc.utah.edu/common/home/u1142914/lib/ytopt_vinu/experiments/heat-3d_chill_openmp/tmp_files/148.c:18:55: error: use of undeclared identifier 't14'\n    #pragma omp parallel for private(t4,t6,t8,t10,t12,t14)\n                                                      ^\n2 errors generated.\n"
+compile failed
+OUTPUT:9223372036854775808.000000
+END TIME:1571552001

@@ -1,0 +1,6 @@
+START TIME:1566587063
+INPUT:['b', 'a', 'd']
+b"clang-9: error: no such file or directory: '/uufs/chpc.utah.edu/common/home/u1142914/lib/ytopt_vinu/experiments/heat-3d/tmp_files/1670.c'\n"
+compile failed
+OUTPUT:9223372036854775808.000000
+END TIME:1566587063

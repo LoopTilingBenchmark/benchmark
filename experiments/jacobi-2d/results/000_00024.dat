@@ -1,0 +1,6 @@
+START TIME:1567190059
+INPUT:['a', 'c']
+b"clang-9: error: no such file or directory: '/uufs/chpc.utah.edu/common/home/u1142914/lib/ytopt_vinu/experiments/jacobi-2d/tmp_files/9830.c'\n"
+compile failed
+OUTPUT:9223372036854775808.000000
+END TIME:1567190059

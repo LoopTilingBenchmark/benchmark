@@ -1,0 +1,12 @@
+{
+    "acq_func": "gp_hedge",
+    "base_estimator": "RF",
+    "exp_dir": "experiments/fdtd-2d_chill",
+    "exp_id": "fdtd-2d",
+    "kappa": 0.0,
+    "max_evals": 1000,
+    "max_time": 30.0,
+    "patience_fac": 10.0,
+    "prob_attr": "problem",
+    "prob_path": "polybench/polybench-code/stencils/fdtd-2d/problem_chill.py"
+}
